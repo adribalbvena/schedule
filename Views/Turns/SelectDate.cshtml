@@ -1,0 +1,59 @@
+@model tp_nt1.Models.Turn
+
+@{
+    ViewData["Title"] = "Crear Turno";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+
+    <div>
+        <h4>Confirmar Turno</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                Nombre de la prestaci�n:
+            </dt>
+            <dd class="col-sm-10">
+                @ViewBag.medicalServiceName
+            </dd>
+            <dt class="col-sm-2">
+                Nombre del Profesional:
+            </dt>
+            <dd class="col-sm-10">
+                @ViewBag.professionalName
+            </dd>
+        </dl>
+    </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <form asp-action="ConfirmTurn">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" name="medicalServiceId" value="@TempData["medicalServiceId"]" />
+                        <input type="hidden" name="professionalId" value="@TempData["professionalId"]" />
+                        <div class="form-group">
+                            <label asp-for="Date" class="control-label"></label>
+                            <select name="date" class="form-control" asp-items="ViewBag.date"></select>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Siguiente" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div>
+                <a asp-action="SelectMedicalService" class="btn btn-outline-info ml-1"> Volver</a>
+            </div>
+
+            @section Scripts {
+                @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+            }
+</body>
+</html>

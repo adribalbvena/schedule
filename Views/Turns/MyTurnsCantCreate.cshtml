@@ -1,0 +1,37 @@
+﻿@model IEnumerable<tp_nt1.Models.Turn>
+
+@{
+    ViewData["Title"] = "Mis Turnos";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    No es posible crear un turno
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td>
+                    Usted ya posee un turno activo.
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div>
+        <a class="btn btn-outline-info ml-1" asp-action="MyTurns">Volver</a>
+    </div>
+</body>
+</html>

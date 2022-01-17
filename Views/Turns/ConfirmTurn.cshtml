@@ -1,0 +1,49 @@
+@model tp_nt1.Models.Turn
+
+@{
+    ViewData["Title"] = "Crear Turno";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+    <div class="row">
+        <div class="col-5">
+            <div class="card">
+                <img class="card-img-top" src="~/img/calendario.jpg" alt="Card Image" />
+                <div class="card-body">
+                    <h4 class="card-title">Confirmacion de Turno</h4>
+                    <p class="card-text">@ViewBag.medicalServiceName</p>
+                    <p class="card-text">@ViewBag.professionalName</p>
+                    <p class="card-text">@ViewBag.dateTime</p>
+                </div>
+                <div class="card-body">
+                    <div class="col-md-5" >
+                        <form asp-action="Create">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" name="medicalServiceId" value="@TempData["medicalServiceId"]" />
+                            <input type="hidden" name="professionalId" value="@TempData["professionalId"]" />
+                            <input type="hidden" name="date" value="@TempData["date"]" />
+                            <div class="form-group">
+                                <input type="submit" value="Confirmar" class="btn btn-success" />
+                                <div>
+                                    <a asp-action="SelectMedicalService" class="btn btn-outline-info ml-1">Volver</a>
+                                </div>
+                                
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>

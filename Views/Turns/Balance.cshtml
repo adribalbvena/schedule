@@ -1,0 +1,78 @@
+﻿@model IEnumerable<tp_nt1.Models.Turn>
+
+@{
+    ViewData["Title"] = "Balance Mensual";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+    <h3 class="text-center">Balance Mensual </h3> 
+    <div class="alert alert-success text-md-center" role="alert" >
+        Importe mensual a percibir: <strong>$@ViewData["Price"]</strong>
+    </div>
+    <h4>Resumen:</h4>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Active)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Patient)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Confirmed)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Professional.MedicalService.Duration)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Professional.MedicalService.Price)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Active)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Patient.FullName)
+                    </td>
+                    <td>
+                        @if (item.Confirmed)
+                        {
+                            <p>Confirmado</p>
+                        }
+                        else
+                        {
+                            <p>No Confirmado</p>
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Professional.MedicalService.Duration) min
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Professional.MedicalService.Price)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>

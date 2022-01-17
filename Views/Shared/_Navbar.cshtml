@@ -1,0 +1,105 @@
+﻿<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-light border-bottom box-shadow mb-3">
+        <div class="container">
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                <img src="~/img/schedule.png" style="height:50px;" />
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <ul class="navbar-nav flex-grow-1">
+                    @if (User.IsInRole(nameof(Role.Administrador)))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Admins" asp-action="Index">Administradores</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Professionals" asp-action="Index">Profesionales</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Patients" asp-action="Index">Pacientes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="MedicalServices" asp-action="Index">Prestaciones</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Turns" asp-action="Index">Turnos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Forms" asp-action="Index">Formularios De Consulta</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <ul class="navbar-nav">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li class="dropdown">
+                        <button class="btn dropdown-toggle" type="button" id="menuOpciones" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Hola, @User.FindFirstValue(ClaimTypes.GivenName) <span class="caret ml-1"></span>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="menuOpciones">
+                            @if (User.IsInRole(nameof(Role.Profesional)))
+                            {
+                                <a class="dropdown-item" asp-controller="Turns" asp-action="ProfessionalTurns">
+                                    Mis Turnos Asignados
+                                </a>
+                                <hr />
+                                <a class="dropdown-item" asp-controller="Forms" asp-action="Index">
+                                    Consultas Recibidas
+                                </a>
+                                <hr />
+                                <a class="dropdown-item" asp-controller="Turns" asp-action="Balance">
+                                    Balance
+                                </a>
+                                <hr />
+
+                            }
+                            else if (User.IsInRole(nameof(Role.Paciente)))
+                            {
+                                <a class="dropdown-item" asp-controller="Patients" asp-action="EditMe">
+                                    Editar Mis Datos
+                                </a>
+                                <hr />
+                                <a class="dropdown-item" asp-controller="Turns" asp-action="MyTurns">
+                                    Mis Turnos
+                                </a>
+                                <hr />
+                                <a class="dropdown-item" asp-controller="Forms" asp-action="Create">
+                                    Formulario De Consulta
+                                </a>
+                                <hr />
+                            }
+                            <form id="logoutForm" method="post" asp-controller="Access" asp-action="LogOut">
+                                <button type="submit" class="dropdown-item">
+                                    Salir
+                                </button>
+                            </form>
+                        </div>
+                    </li>
+
+                }
+                else
+                {
+            <li class="ml-1">
+                <a asp-controller="Access" asp-action="Login" class="btn btn-outline-primary">
+                    Ingresar
+                </a>
+                <a asp-controller="Access" asp-action="Register" class="btn btn-primary">
+                    Registrarse
+                </a>
+                <a asp-controller="Forms" asp-action="Create" class="btn btn-link">
+                    Consulta
+                </a>
+            </li>              
+                }
+            
+            </ul>
+        </div>
+    </nav>
+</header>

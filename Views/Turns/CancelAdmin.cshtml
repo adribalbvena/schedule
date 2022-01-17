@@ -1,0 +1,74 @@
+﻿@model tp_nt1.Models.Turn
+
+@{
+    ViewData["Title"] = "Cancelar Turno";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+
+    <h3>Seguro que desea cancelar este turno?</h3>
+    <div>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Date)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Date)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Confirmed)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Confirmed)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Active)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Active)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.CreationDate)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CreationDate)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Patient)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Patient.FullName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Professional)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Professional.FullName)
+            </dd>
+        </dl>
+
+        <form asp-action="CancelAdminConfirmed">
+            <input type="hidden" asp-for="Id" />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <strong>Descripcion de Cancelacion:</strong>              
+                <label for="CancelDescription" class="control-label"></label>
+                <textarea name="description" rows="4" class="form-control col-sm-6"></textarea>
+            </div>         
+            <div class="form-group">
+                <input type="submit" value="Cancelar" class="btn btn-danger" />
+                <a class="btn btn-outline-info ml-1" asp-action="Index">Volver</a>
+            </div>
+            
+        </form>
+    </div>
+</body>
+</html>

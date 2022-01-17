@@ -1,0 +1,152 @@
+﻿@model IEnumerable<tp_nt1.Models.Turn>
+
+@{
+    ViewData["Title"] = "Turno";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Active)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Patient)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Professional)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Confirmed)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                @if (item.Active)
+                {
+                    <tr>
+                        <td>
+                            <p>Activo</p>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Patient.FullName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Professional.FullName)
+                        </td>
+                        <td>
+                            @if (item.Confirmed)
+                            {
+                                if (!string.IsNullOrWhiteSpace(item.CancelDescription))
+                                {
+                                    <p> Cancelado </p>
+
+                                }
+                                else
+
+                                {
+                                    <p>Confirmado</p>
+                                }
+
+                            }
+                            else
+                            {
+                                if (!string.IsNullOrWhiteSpace(item.CancelDescription))
+                                {
+                                    <p> Cancelado </p>
+
+                                }
+                                else
+                                {
+                                    <p>No Confirmado</p>
+
+                                }
+
+                            }
+                        </td>
+                        <td class="btn-group-vertical">
+                            @if (!item.Confirmed)
+                            {
+                                <form asp-action="ChangeConfirmedStatus">
+                                    <input type="hidden" name="turnId" value="@item.Id" />
+                                    <button class="btn btn-outline-success btn-sm" type="submit">Confirmar</button>
+                                </form>
+                            }
+                            <a class="btn btn-outline-primary btn-sm" asp-action="Details" asp-route-id="@item.Id">Detalles</a>
+                            <a class="btn btn-outline-danger btn-sm" asp-action="CancelAdmin" asp-route-id="@item.Id">Cancelar</a>
+                        </td>
+                    </tr>
+
+                }
+                else
+                {
+                    <tr class="text-muted">
+                        <td>
+                            <p>Inactivo</p>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Patient.FullName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Professional.FullName)
+                        </td>
+                        <td>
+                            @if (item.Confirmed)
+                            {
+                                if (!string.IsNullOrWhiteSpace(item.CancelDescription))
+                                {
+                                    <p> Cancelado </p>
+
+                                }
+                                else
+
+                                {
+                                    <p>Confirmado</p>
+                                }
+
+                            }
+                            else
+                            {
+                                if (!string.IsNullOrWhiteSpace(item.CancelDescription))
+                                {
+                                    <p> Cancelado </p>
+
+                                }
+                                else
+                                {
+                                    <p>No Confirmado</p>
+
+                                }
+
+                            }
+                        </td>
+                        <td class="btn-group-vertical">
+                            <a class="btn btn-outline-primary" asp-action="Details" asp-route-id="@item.Id">Detalles</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</body>
+</html>
